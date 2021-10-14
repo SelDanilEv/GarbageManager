@@ -7,11 +7,11 @@ namespace GarbageManager.Services
 {
     public class SettingsService : ISettingsService
     {
-        private IFileService fileService;
+        private ISerializationToFile fileService;
 
         public SettingsService()
         {
-            fileService = new FileService();
+            fileService = new SerializationToFileService();
         }
 
         public AppSettings GetCommonSettings()

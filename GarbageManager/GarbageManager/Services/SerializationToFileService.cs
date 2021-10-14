@@ -6,7 +6,7 @@ using System.IO;
 
 namespace GarbageManager.Services
 {
-    class FileService : IFileService
+    class SerializationToFileService : ISerializationToFile
     {
         public bool CreateFileIfNotExist(GMFileInfo fileInfo)
         {

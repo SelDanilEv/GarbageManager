@@ -2,7 +2,7 @@
 
 namespace GarbageManager.Services.Interfaces
 {
-    interface IFileService
+    interface ISerializationToFile
     {
         T ReadFileAndDeserialize<T>(GMFileInfo fileInfo) where T : new();
         bool WriteFile<T>(T model, GMFileInfo fileInfo);
