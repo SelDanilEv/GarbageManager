@@ -4,6 +4,7 @@ namespace GarbageManager.Enums
 {
     public static class SpecialPath
     {
-        public static String Relative { get { return ""; } }
+        public const String Home = "";
+        public const String Parent = "../";
     }
 }

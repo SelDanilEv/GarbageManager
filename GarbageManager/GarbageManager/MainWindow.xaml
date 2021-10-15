@@ -5,13 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GarbageManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <DockPanel Margin="10,10,40,350">
-            <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Left"  DockPanel.Dock="Top" Margin="10,0,0,10">
-                <Button Name="btnChooseFile" Click="btnChooseFile_Click">Open file</Button>
-                <TextBox Margin="10,0,0,0" Width="300" Name="tbfilePath" />
-            </WrapPanel>
-        </DockPanel>
+        Title="Garbage manager"
+        Height="450" Width="800" 
+        ResizeMode="CanMinimize" 
+        WindowStartupLocation="CenterScreen" 
+        WindowState="Minimized">
+    <Grid Background="#FF535151">
+        <WrapPanel VerticalAlignment="Top" 
+                   HorizontalAlignment="Left"  
+                   Margin="50,25,0,10">
+            <Button Name="btnChooseGarbageDirectory" 
+                    FontSize="15px" 
+                    Height="32" Width="190" 
+                    Background="#FFCAE4D4" 
+                    BorderBrush="#FF69E025"
+                    Click="btnChooseGarbageDirectory_Click" >
+                Choose garbage directiry
+            </Button>
+            <TextBox 
+                     x:Name="tbfilePath" 
+                     Margin="20,0,0,0" 
+                     TextAlignment="Left" 
+                     VerticalContentAlignment="Center" 
+                     FontSize="15px" 
+                     Width="482" 
+                     IsReadOnly="True" 
+                     Background="#FFDDE2AD"/>
+        </WrapPanel>
+        <WrapPanel Margin="60,100,0,0" 
+                   Width="150" Height="30" 
+                   VerticalAlignment="Top" 
+                   HorizontalAlignment="Left">
+            <Button Name="btnStartForceCleanup" 
+                    FontSize="15px" 
+                    Content="Force cleanup" 
+                    Height="30" Width="150" 
+                    Background="#FF484DAA" 
+                    BorderBrush="#FF00FF17"
+                    Click="btnStartForceCleanup_Click" />
+        </WrapPanel>
     </Grid>
 </Window>

@@ -20,11 +20,8 @@ namespace GarbageManager.Model
 
         public override string ToString()
         {
-            if (Path != SpecialPath.Relative && !Path.EndsWith("/", StringComparison.OrdinalIgnoreCase))
-            {
-                Path += "/";
-            }
-            return $"{Path}{Name}.{Extension}";
+            var relativePath = new FileSystemPathString(Path,Name);
+            return $"{relativePath.ToString()}.{Extension}";
         }
     }
 }

@@ -9,9 +9,11 @@
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net5.0-windows</TargetFramework>
-		<RootNamespace>WpfApp1_5</RootNamespace>
+		<RootNamespace>GarbageManager</RootNamespace>
 		<UseWPF>true</UseWPF>
 		<UseWindowsForms>true</UseWindowsForms>
+		<Authors>DefenderSD</Authors>
+		<Product>Garbage Manager</Product>
 	</PropertyGroup>
 
   <ItemGroup>
