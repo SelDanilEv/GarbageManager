@@ -6,43 +6,86 @@
         xmlns:local="clr-namespace:GarbageManager"
         mc:Ignorable="d"
         Title="Garbage manager"
-        Height="450" Width="800" 
+        Height="550" Width="900" 
         ResizeMode="CanMinimize" 
         WindowStartupLocation="CenterScreen" 
-        WindowState="Minimized">
+        WindowStyle="SingleBorderWindow"
+        Background="{x:Null}" 
+        Foreground="Black" Icon="/GMmini.ico">
+    <Window.Resources>
+        <Style x:Key="MyButtonStyle" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                        BorderThickness="1"
+                        Padding="4,2" 
+                        BorderBrush="DarkGray" 
+                        CornerRadius="3" 
+                        Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="Black" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid Background="#FF535151">
         <WrapPanel VerticalAlignment="Top" 
                    HorizontalAlignment="Left"  
-                   Margin="50,25,0,10">
+                   Margin="40,25,0,10">
             <Button Name="btnChooseGarbageDirectory" 
                     FontSize="15px" 
                     Height="32" Width="190" 
-                    Background="#FFCAE4D4" 
-                    BorderBrush="#FF69E025"
-                    Click="btnChooseGarbageDirectory_Click" >
-                Choose garbage directiry
+                    Background="#FFC1C133" 
+                    BorderBrush="{x:Null}"
+                    Click="btnChooseGarbageDirectory_Click" 
+                    Style="{StaticResource MyButtonStyle}">
             </Button>
             <TextBox 
                      x:Name="tbfilePath" 
-                     Margin="20,0,0,0" 
+                     Margin="20,0,20,0" 
                      TextAlignment="Left" 
                      VerticalContentAlignment="Center" 
-                     FontSize="15px" 
-                     Width="482" 
+                     FontSize="17px" 
+                     Width="400" 
                      IsReadOnly="True" 
-                     Background="#FFDDE2AD"/>
+                     Background="{x:Null}" 
+                     BorderBrush="{x:Null}" 
+                     SelectionTextBrush="{x:Null}" 
+                     SelectionBrush="{x:Null}" 
+                     Foreground="White"/>
+            <Label Name="lbLanguage" Foreground="#FFFAF5F5" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Width="80px"></Label>
+            <ComboBox Name="cbLanguage" Width="100" Margin="5" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Stretch" FontSize="15" IsReadOnly="True" SelectionChanged="cbLanguage_SelectionChanged" Background="{x:Null}" >
+                <ComboBoxItem Tag="en-US" Content="English"/>
+                <ComboBoxItem Tag="ru-Ru" Content="Русский"/>
+            </ComboBox>
         </WrapPanel>
-        <WrapPanel Margin="60,100,0,0" 
-                   Width="150" Height="30" 
+        <WrapPanel Margin="50,100,0,10" 
+                   Width="190" Height="30" 
                    VerticalAlignment="Top" 
                    HorizontalAlignment="Left">
-            <Button Name="btnStartForceCleanup" 
+            <Button x:Name="btnStartForceCleanup" 
                     FontSize="15px" 
-                    Content="Force cleanup" 
-                    Height="30" Width="150" 
-                    Background="#FF484DAA" 
-                    BorderBrush="#FF00FF17"
-                    Click="btnStartForceCleanup_Click" />
+                    Margin="0"
+                    Height="30" Width="190" 
+                    Background="White" 
+                    BorderBrush="{x:Null}"
+                    Click="btnStartForceCleanup_Click"
+                    Style="{StaticResource MyButtonStyle}"/>
         </WrapPanel>
+        <StackPanel Margin="680,0,0,20" 
+                   Width="200" 
+                   VerticalAlignment="Bottom" 
+                   HorizontalAlignment="Left"
+                   Name="ResultPanel">
+        </StackPanel>
     </Grid>
 </Window>

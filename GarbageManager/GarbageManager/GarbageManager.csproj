@@ -14,10 +14,61 @@
 		<UseWindowsForms>true</UseWindowsForms>
 		<Authors>DefenderSD</Authors>
 		<Product>Garbage Manager</Product>
+		<ApplicationIcon>GM.ico</ApplicationIcon>
+		<AssemblyVersion>2.1</AssemblyVersion>
+		<FileVersion>2.1</FileVersion>
+		<Version>2.1</Version>
 	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="GM.ico" />
+	  <None Remove="GMmini.ico" />
+	</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="GM.ico" />
+    <Resource Include="GMmini.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Model\Result\ResultMessages - Copy.Designer.cs">
+      <DependentUpon>ResultMessages.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="Model\Result\ResultMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResultMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resource\CommonResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>CommonResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Model\Result\ResultMessages.ru-RU.resx">
+      <LastGenOutput>ResultMessages.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Model\Result\ResultMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResultMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resource\CommonResources.ru-RU.resx">
+      <LastGenOutput>CommonResources.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resource\CommonResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommonResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

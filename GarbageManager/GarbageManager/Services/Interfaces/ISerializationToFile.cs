@@ -1,11 +1,12 @@
 ﻿using GarbageManager.Model;
+using GarbageManager.Model.Result.Interfaces;
 
 namespace GarbageManager.Services.Interfaces
 {
     interface ISerializationToFile
     {
-        T ReadFileAndDeserialize<T>(GMFileInfo fileInfo) where T : new();
-        bool WriteFile<T>(T model, GMFileInfo fileInfo);
-        bool CreateFileIfNotExist(GMFileInfo fileInfo);
+        IResultWithData<T> ReadFileAndDeserialize<T>(GMFileInfo fileInfo) where T : new();
+        IResult WriteFile<T>(T model, GMFileInfo fileInfo);
+        IResult CreateFileIfNotExist(GMFileInfo fileInfo);
     }
 }

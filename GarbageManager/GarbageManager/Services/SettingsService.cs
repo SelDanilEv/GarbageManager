@@ -1,7 +1,7 @@
-﻿using GarbageManager.Model;
+﻿using GarbageManager.Consts;
+using GarbageManager.Model;
+using GarbageManager.Model.Result.Interfaces;
 using GarbageManager.Services.Interfaces;
-using GarbageManager.Singleton;
-using System;
 
 namespace GarbageManager.Services
 {
@@ -14,24 +14,26 @@ namespace GarbageManager.Services
             fileService = new SerializationToFileService();
         }
 
-        public AppSettings GetCommonSettings()
+        public IResultWithData<AppSettings> GetCommonSettings()
         {
-            return fileService.ReadFileAndDeserialize<AppSettings>(GMAppContext.AppSettingsFileName);
+            var result = fileService.ReadFileAndDeserialize<AppSettings>(AppConstants.AppSettingsFileName);
+            return result;
         }
 
-        public StartAppSettings GetStartAppSettings()
+        public IResultWithData<StartAppSettings> GetStartAppSettings()
         {
-            return fileService.ReadFileAndDeserialize<StartAppSettings>(GMAppContext.StartAppSettingsFileName);
+            var result = fileService.ReadFileAndDeserialize<StartAppSettings>(AppConstants.StartAppSettingsFileName);
+            return result;
         }
 
-        public bool UpdateSettings(AppSettings settings)
+        public IResult UpdateSettings(AppSettings settings)
         {
-            return fileService.WriteFile(settings, GMAppContext.AppSettingsFileName);
+            return fileService.WriteFile(settings, AppConstants.AppSettingsFileName);
         }
 
-        public bool UpdateSettings(StartAppSettings settings)
+        public IResult UpdateSettings(StartAppSettings settings)
         {
-            return fileService.WriteFile(settings, GMAppContext.StartAppSettingsFileName);
+            return fileService.WriteFile(settings, AppConstants.StartAppSettingsFileName);
         }
     }
 }

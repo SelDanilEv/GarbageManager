@@ -1,26 +1,10 @@
-﻿using GarbageManager.Enums;
-using System;
-
-namespace GarbageManager.Model
+﻿namespace GarbageManager.Model
 {
     public class FileSystemPathString
     {
         public string BasePath { get; set; }
         public string RelativePath { get; set; }
 
-        public override string ToString()
-        {
-            if (!string.IsNullOrWhiteSpace(BasePath) && !BasePath.EndsWith("/", StringComparison.OrdinalIgnoreCase))
-            {
-                BasePath += "/";
-            }
-            if (RelativePath.StartsWith("/", StringComparison.OrdinalIgnoreCase))
-            {
-                RelativePath = RelativePath.TrimStart('/');
-            }
-            return $"{BasePath}{RelativePath}";
-        }
-        
         public FileSystemPathString()
         {
         }
@@ -29,6 +13,24 @@ namespace GarbageManager.Model
         {
             BasePath = basePath;
             RelativePath = relativePath;
+        }
+
+        public string GetPath()
+        {
+            if (!string.IsNullOrWhiteSpace(BasePath))
+            {
+                BasePath = BasePath.TrimEnd('/');
+                BasePath += "/";
+            }
+
+            RelativePath = RelativePath.TrimStart('/');
+
+            return $"{BasePath}{RelativePath}";
+        }
+
+        public override string ToString()
+        {
+            return this.GetPath();
         }
     }
 }
