@@ -1,0 +1,3 @@
+﻿Check sending to recycle bin
+Add feature: pick the time for cleanup
+Fix: change time for cleanup

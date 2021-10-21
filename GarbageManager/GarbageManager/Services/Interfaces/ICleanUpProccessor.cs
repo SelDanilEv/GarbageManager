@@ -3,8 +3,8 @@ using GarbageManager.Model.Result.Interfaces;
 
 namespace GarbageManager.Services.Interfaces
 {
-    interface IDirectoryCleanUpProccessor
+    interface ICleanUpProccessor
     {
-       IResultWithData<int> StartDirectoryCleanUp(string parentPath = AppConstants.HomePath);
+       IResultWithData<int> StartCleanUp(string parentPath = AppConstants.HomePath);
     }
 }

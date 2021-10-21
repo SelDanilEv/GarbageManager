@@ -8,27 +8,24 @@ namespace GarbageManager.Services
 {
     class FileSystemCleanUp : IFileSystemCleanUp
     {
-        private IFileCleanUpProccessor _fileProccessManager; 
-        private IDirectoryCleanUpProccessor _directoryProccessManager;
+        private ICleanUpProccessor _cleanUpProccessor;
 
-        public FileSystemCleanUp(IFileCleanUpProccessor fileProccessManager = null, IDirectoryCleanUpProccessor directoryProccessManager = null)
+        public FileSystemCleanUp(ICleanUpProccessor cleanUpProccessor = null)
         {
-            _fileProccessManager = fileProccessManager ?? new FileCleanUpProccessor();
-            _directoryProccessManager = directoryProccessManager ?? new DirectoryCleanUpProccessor();
+            _cleanUpProccessor = cleanUpProccessor ?? new CleanUpProccessor();
         }
 
         public IResultWithData<int> StartCleanUp()
         {
             if (!string.IsNullOrWhiteSpace(GMAppContext.StartAppSettings?.PathToGarbageFolder))
             {
-                var fileCleanupResult = _fileProccessManager.StartFileCleanUp();
-                var directoryCleanupResult = _directoryProccessManager.StartDirectoryCleanUp();
+                var cleanupResult = _cleanUpProccessor.StartCleanUp();
 
                 IResultWithData<int> result = null;
 
-                if (fileCleanupResult.IsSuccess && directoryCleanupResult.IsSuccess)
+                if (cleanupResult.IsSuccess)
                 {
-                    var totalLevel1EntitiesRemoved = fileCleanupResult.GetData + directoryCleanupResult.GetData;
+                    var totalLevel1EntitiesRemoved = cleanupResult.GetData;
                     result = Result<int>.SuccessResult(totalLevel1EntitiesRemoved).BuildMessage(ResultMessages.CleaningCompletedSuccessfully, totalLevel1EntitiesRemoved.ToString());
                     GMAppContext.LastCheckingTime = DateTime.Now;
                 }

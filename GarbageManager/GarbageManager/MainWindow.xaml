@@ -38,7 +38,7 @@
         </Style>
     </Window.Resources>
     <Grid Background="#FF535151">
-        <WrapPanel VerticalAlignment="Top" 
+        <DockPanel VerticalAlignment="Top" 
                    HorizontalAlignment="Left"  
                    Margin="40,25,0,10">
             <Button Name="btnChooseGarbageDirectory" 
@@ -67,20 +67,18 @@
                 <ComboBoxItem Tag="en-US" Content="English"/>
                 <ComboBoxItem Tag="ru-Ru" Content="Русский"/>
             </ComboBox>
-        </WrapPanel>
-        <WrapPanel Margin="50,100,0,10" 
-                   Width="190" Height="30" 
-                   VerticalAlignment="Top" 
-                   HorizontalAlignment="Left">
+        </DockPanel>
+        <DockPanel VerticalAlignment="Top" 
+                   HorizontalAlignment="Left"  
+                   Margin="40,100,0,10">
             <Button x:Name="btnStartForceCleanup" 
-                    FontSize="15px" 
-                    Margin="0"
-                    Height="30" Width="190" 
+                    FontSize="15px"
                     Background="White" 
                     BorderBrush="{x:Null}"
                     Click="btnStartForceCleanup_Click"
+                    Height="32" Width="190"
                     Style="{StaticResource MyButtonStyle}"/>
-        </WrapPanel>
+        </DockPanel>
         <StackPanel Margin="680,0,0,20" 
                    Width="200" 
                    VerticalAlignment="Bottom" 
