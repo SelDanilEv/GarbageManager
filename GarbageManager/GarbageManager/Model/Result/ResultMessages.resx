@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CleaningCompletedSuccessfully" xml:space="preserve">
-    <value>Cleaning completed successfully. Level 1 entities removed: {0}</value>
+    <value>Cleaning completed successfully. Entities removed: {0}</value>
   </data>
   <data name="CleaningFailed" xml:space="preserve">
     <value>Cleaning failed</value>

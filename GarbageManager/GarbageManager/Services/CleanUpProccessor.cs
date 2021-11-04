@@ -33,13 +33,11 @@ namespace GarbageManager.Services
         {
             source.Refresh();
 
-            int removedItems = 0;
-
             foreach (FileInfo fi in source.GetFiles())
             {
-                if (fi.LastAccessTime.AddMonths(0) < DateTime.Now)
+                if (fi.LastAccessTime.AddMonths(1) < DateTime.Now)
                 {
-                    removedItems++;
+                    removedCounter++;
                     FileSystem.DeleteFile(fi.FullName, 
                                             UIOption.OnlyErrorDialogs,
                                             RecycleOption.SendToRecycleBin);
@@ -48,21 +46,20 @@ namespace GarbageManager.Services
 
             foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
             {
-                CleanUpRecursive(diSourceSubDir, removedItems);
+                removedCounter += CleanUpRecursive(diSourceSubDir, removedCounter);
 
-                if (diSourceSubDir.CreationTime.AddMonths(0) < DateTime.Now &&
+                if (diSourceSubDir.CreationTime.AddMonths(2) < DateTime.Now &&
                     diSourceSubDir.GetFiles().Length == 0 &&
                     diSourceSubDir.GetDirectories().Length == 0)
                 {
-                    removedItems++;
+                    removedCounter++;
                     FileSystem.DeleteDirectory(diSourceSubDir.FullName,
                                             UIOption.OnlyErrorDialogs,
                                             RecycleOption.SendToRecycleBin);
-                    diSourceSubDir.Delete(true);
                 }
             }
 
-            return removedItems + removedCounter;
+            return removedCounter;
         }
     }
 }

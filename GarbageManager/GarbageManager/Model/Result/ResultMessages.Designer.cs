@@ -61,7 +61,7 @@ namespace GarbageManager.Model.Result {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cleaning completed successfully. Level 1 entities removed: {0}.
+        ///   Looks up a localized string similar to Cleaning completed successfully. Entities removed: {0}.
         /// </summary>
         internal static string CleaningCompletedSuccessfully {
             get {

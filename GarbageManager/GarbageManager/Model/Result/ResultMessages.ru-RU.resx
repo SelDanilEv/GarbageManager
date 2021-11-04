@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CleaningCompletedSuccessfully" xml:space="preserve">
-    <value>Очистка закончена. Сущностей 1-го уровня удалено: {0}</value>
+    <value>Очистка закончена. Всего удалено: {0}</value>
   </data>
   <data name="CleaningFailed" xml:space="preserve">
     <value>Очистка не удалась</value>
