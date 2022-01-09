@@ -13,6 +13,8 @@
         Background="{x:Null}" 
         Foreground="Black" Icon="/GMmini.ico">
     <Window.Resources>
+        <SolidColorBrush x:Key="IsMouseOverBorderColor" Color="Black" />
+        <SolidColorBrush x:Key="BorderColor" Color="DarkGray" />
         <Style x:Key="MyButtonStyle" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True"/>
             <Setter Property="Margin" Value="5"/>
@@ -22,14 +24,14 @@
                         <Border Name="border" 
                         BorderThickness="1"
                         Padding="4,2" 
-                        BorderBrush="DarkGray" 
+                        BorderBrush="{StaticResource BorderColor }" 
                         CornerRadius="3" 
                         Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="border" Property="BorderBrush" Value="Black" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource IsMouseOverBorderColor }" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -71,13 +73,40 @@
         <DockPanel VerticalAlignment="Top" 
                    HorizontalAlignment="Left"  
                    Margin="40,100,0,10">
-            <Button x:Name="btnStartForceCleanup" 
+            <Label x:Name="labelFileOrDirectoryName" 
+                   FontSize="17px" 
+                   Foreground="White"
+                   VerticalContentAlignment="Center">
+            </Label>
+            <TextBox 
+                     x:Name="tbRemoveFolderOrFileName" 
+                     TextAlignment="Left" 
+                     VerticalContentAlignment="Center" 
+                     FontSize="17px" 
+                     Width="324" 
+                     Background="DarkGreen" 
+                     BorderBrush="{StaticResource BorderColor}" 
+                     SelectionTextBrush="PaleTurquoise" 
+                     SelectionBrush="Red" 
+                     Foreground="White"/>
+            <Button Name="btnRemoveFileOrDirectory"
                     FontSize="15px"
-                    Background="White" 
+                    Background="White"
+                    BorderBrush="{x:Null}"
+                    Height="32" Width="190"
+                    Style="{StaticResource MyButtonStyle}" Click="btnRemoveFileOrDirectory_Click"/>
+        </DockPanel>
+        <DockPanel VerticalAlignment="Top" 
+                   HorizontalAlignment="Left"  
+                   Margin="40,175,0,10">
+            <Button Name="btnStartForceCleanup"
+                    FontSize="15px"
+                    Background="White"
                     BorderBrush="{x:Null}"
                     Click="btnStartForceCleanup_Click"
                     Height="32" Width="190"
                     Style="{StaticResource MyButtonStyle}"/>
+
         </DockPanel>
         <StackPanel Margin="680,0,0,20" 
                    Width="200" 

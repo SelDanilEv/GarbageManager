@@ -120,8 +120,14 @@
   <data name="ChooseGarbageDirectoryButton" xml:space="preserve">
     <value>Choose garbage directory</value>
   </data>
+  <data name="FileOrDictionaryNameLabel" xml:space="preserve">
+    <value>File or dictionary name</value>
+  </data>
   <data name="LanguageLable" xml:space="preserve">
     <value>Language</value>
+  </data>
+  <data name="RemoveFilesAndDirectories" xml:space="preserve">
+    <value>Remove</value>
   </data>
   <data name="ShowIfGarbageDirectoryIsNotInstalled" xml:space="preserve">
     <value>&lt;-- Please choose garbage directory here</value>

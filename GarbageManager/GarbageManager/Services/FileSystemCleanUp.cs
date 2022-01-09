@@ -3,6 +3,7 @@ using GarbageManager.Model.Result.Interfaces;
 using GarbageManager.Services.Interfaces;
 using GarbageManager.Singleton;
 using System;
+using System.Threading.Tasks;
 
 namespace GarbageManager.Services
 {
@@ -12,29 +13,45 @@ namespace GarbageManager.Services
 
         public FileSystemCleanUp(ICleanUpProccessor cleanUpProccessor = null)
         {
-            _cleanUpProccessor = cleanUpProccessor ?? new CleanUpProccessor();
+            _cleanUpProccessor = new CleanUpProccessor();
         }
 
-        public IResultWithData<int> StartCleanUp()
+        public async Task<IResultWithData<int>> StartCleanUp()
         {
             if (!string.IsNullOrWhiteSpace(GMAppContext.StartAppSettings?.PathToGarbageFolder))
             {
-                var cleanupResult = _cleanUpProccessor.StartCleanUp();
-
-                IResultWithData<int> result = null;
+                var cleanupResult = await _cleanUpProccessor.StartCleanUp();
 
                 if (cleanupResult.IsSuccess)
                 {
-                    var totalLevel1EntitiesRemoved = cleanupResult.GetData;
-                    result = Result<int>.SuccessResult(totalLevel1EntitiesRemoved).BuildMessage(ResultMessages.CleaningCompletedSuccessfully, totalLevel1EntitiesRemoved.ToString());
+                    var totalEntitiesRemoved = cleanupResult.GetData;
                     GMAppContext.LastCheckingTime = DateTime.Now;
+                    return  Result<int>.SuccessResult(totalEntitiesRemoved).BuildMessage(ResultMessages.CleaningCompletedSuccessfully, totalEntitiesRemoved.ToString());
                 }
                 else
                 {
-                    result = Result<int>.ErrorResult(ResultMessages.CleaningFailed);
+                    return Result<int>.ErrorResult(ResultMessages.CleaningFailed);
                 }
+            }
 
-                return result;
+            return Result<int>.ErrorResult(ResultMessages.GarbageFolderIsNotFound);
+        }
+
+        public async Task<IResultWithData<int>> RemoveFilesAndDirectories(string fileOrDirectoryName)
+        {
+            if (!string.IsNullOrWhiteSpace(GMAppContext.StartAppSettings?.PathToGarbageFolder))
+            {
+                var cleanupResult = await _cleanUpProccessor.RemoveFilesAndDirectories(fileOrDirectoryName);
+
+                if (cleanupResult.IsSuccess)
+                {
+                    var totalEntitiesRemoved = cleanupResult.GetData;
+                    return Result<int>.SuccessResult(totalEntitiesRemoved).BuildMessage(ResultMessages.CleaningCompletedSuccessfully, totalEntitiesRemoved.ToString());
+                }
+                else
+                {
+                    return Result<int>.ErrorResult(ResultMessages.CleaningFailed);
+                }
             }
 
             return Result<int>.ErrorResult(ResultMessages.GarbageFolderIsNotFound);

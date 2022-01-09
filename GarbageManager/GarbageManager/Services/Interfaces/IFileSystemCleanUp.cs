@@ -1,9 +1,11 @@
 ﻿using GarbageManager.Model.Result.Interfaces;
+using System.Threading.Tasks;
 
 namespace GarbageManager.Services.Interfaces
 {
     interface IFileSystemCleanUp
     {
-        IResultWithData<int> StartCleanUp();
+        Task<IResultWithData<int>> StartCleanUp();
+        Task<IResultWithData<int>> RemoveFilesAndDirectories(string fileOrDirectoryName);
     }
 }

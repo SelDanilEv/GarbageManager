@@ -62,11 +62,36 @@ namespace GarbageManager
                 ProccessResult(startAppSettingsResult);
             }
 
-
             //StartTest();
         }
 
         private void btnChooseGarbageDirectory_Click(object sender, RoutedEventArgs e)
+        {
+            var task = new Thread(async () => await btnChooseGarbageDirectory_Handler(sender, e));
+            task.IsBackground = true;
+            task.SetApartmentState(ApartmentState.STA);
+            task.Start();
+        }
+
+        private void btnStartForceCleanup_Click(object sender, RoutedEventArgs e)
+        {
+            var task = new Thread(async () => await btnStartForceCleanup_Handler(sender, e));
+            task.IsBackground = true;
+            task.SetApartmentState(ApartmentState.STA);
+            task.Start();
+        }
+
+        private void btnRemoveFileOrDirectory_Click(object sender, RoutedEventArgs e)
+        {
+            var task = new Thread(async () => await btnRemoveFileOrDirectory_Handler(sender, e));
+            task.IsBackground = true;
+            task.SetApartmentState(ApartmentState.STA);
+            task.Start();
+        }
+
+        #region Handlers
+
+        private async Task btnChooseGarbageDirectory_Handler(object sender, RoutedEventArgs e)
         {
             var filePath = SelectFolderPathBrowserDialog();
             if (string.IsNullOrWhiteSpace(filePath))
@@ -79,14 +104,34 @@ namespace GarbageManager
 
             GMAppContext.StartAppSettings = newStartAppSettings;
             _settingsService.UpdateSettings(newStartAppSettings);
-            tbfilePath.Text = filePath;
+
+            this.Dispatcher.Invoke(() =>
+            {
+                tbfilePath.Text = filePath;
+            });
         }
 
-        private void btnStartForceCleanup_Click(object sender, RoutedEventArgs e)
+        private async Task btnStartForceCleanup_Handler(object sender, RoutedEventArgs e)
         {
-            var cleanupResult = _fileSystemManager.StartCleanUp();
-            ProccessResult(cleanupResult);
+            await this.Dispatcher.InvokeAsync(async () =>
+            {
+                var cleanupResult = await _fileSystemManager.StartCleanUp();
+
+                ProccessResult(cleanupResult);
+            });
         }
+
+        private async Task btnRemoveFileOrDirectory_Handler(object sender, RoutedEventArgs e)
+        {
+            await this.Dispatcher.InvokeAsync(async () =>
+            {
+                string fileOrDirectoryName = tbRemoveFolderOrFileName.Text;
+                var cleanupResult = await _fileSystemManager.RemoveFilesAndDirectories(fileOrDirectoryName);
+                ProccessResult(cleanupResult);
+            });
+        }
+
+        #endregion
 
         private void ProccessResult(IResult result)
         {
@@ -162,6 +207,8 @@ namespace GarbageManager
 
             btnStartForceCleanup.Content = CommonResources.StartCleanupButton;
             btnChooseGarbageDirectory.Content = CommonResources.ChooseGarbageDirectoryButton;
+            btnRemoveFileOrDirectory.Content = CommonResources.RemoveFilesAndDirectories;
+            labelFileOrDirectoryName.Content = CommonResources.FileOrDictionaryNameLabel;
         }
 
         private string SelectFolderPathBrowserDialog()
@@ -176,6 +223,5 @@ namespace GarbageManager
                 return null;
             }
         }
-
     }
 }

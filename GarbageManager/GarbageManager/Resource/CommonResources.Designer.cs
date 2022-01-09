@@ -70,11 +70,29 @@ namespace GarbageManager.Resource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File or dictionary name.
+        /// </summary>
+        internal static string FileOrDictionaryNameLabel {
+            get {
+                return ResourceManager.GetString("FileOrDictionaryNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         internal static string LanguageLable {
             get {
                 return ResourceManager.GetString("LanguageLable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        internal static string RemoveFilesAndDirectories {
+            get {
+                return ResourceManager.GetString("RemoveFilesAndDirectories", resourceCulture);
             }
         }
         
